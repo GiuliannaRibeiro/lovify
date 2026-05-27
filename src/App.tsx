@@ -6,13 +6,10 @@ import PlaylistPage from "./routes/playlist.$id";
 export default function App() {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<HomePage />}
-      />
+      <Route index element={<HomePage />} />
 
       <Route
-        path="/playlist/:id"
+        path="playlist/:id"
         element={<PlaylistPage />}
       />
     </Routes>
