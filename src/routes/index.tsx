@@ -1,4 +1,4 @@
-import { PlaylistForm } from "../components/playlist/components/PlaylistForm";
+import { PlaylistForm } from "../components/playlist/PlaylistForm";
 import lovifyIcon from "../assets/lovify-minimalist.png";
 
 export default function HomePage() {

@@ -4,11 +4,11 @@ import { getPlaylist } from "../components/playlist/lib/playlist-storage";
 
 import { usePlaylistPlayer } from "../components/playlist/hooks/usePlaylistPlayer";
 
-import { PlaylistHero } from "../components/playlist/components/PlaylistHero";
-import { PlaylistControls } from "../components/playlist/components/PlaylistControls";
-import { TrackList } from "../components/playlist/components/TrackList";
-import { ShareSection } from "../components/playlist/components/ShareSection";
-import { NowPlayingBar } from "../components/playlist/components/NowPlayingBar";
+import { PlaylistHero } from "../components/playlist/PlaylistHero";
+import { PlaylistControls } from "../components/playlist/PlaylistControls";
+import { TrackList } from "../components/playlist/TrackList";
+import { ShareSection } from "../components/playlist/ShareSection";
+import { NowPlayingBar } from "../components/playlist/NowPlayingBar";
 
 export default function PlaylistPage() {
   const { id } = useParams();
