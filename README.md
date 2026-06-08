@@ -1,10 +1,12 @@
 # ❤️ Lovify
 
-🌐 **Live demo:** [giuliannaribeiro.github.io/lovify](https://giuliannaribeiro.github.io/lovify/)
-
 Lovify started as a personal gift and grew into a web app where anyone can create and share a personalized playlist for their partner, perfect for **Valentine's Day**, anniversaries, or just because. Built with React 19 and Vite, it offers a Spotify-inspired interface focused on a clean, emotional experience: customize the cover photo, playlist name, and song list, then share a unique link. Playlists are stored in **Firebase Firestore**, making each creation accessible from anywhere.
 
-✅ **Features**
+**Live demo:** [giuliannaribeiro.github.io/lovify](https://giuliannaribeiro.github.io/lovify/)
+
+---
+
+## ✅ Features
 
 - **Playlist Creation**: Customize name, cover photo, and track list
 - **Photo Upload**: Optional cover image with a default fallback
@@ -15,7 +17,7 @@ Lovify started as a personal gift and grew into a web app where anyone can creat
 - **Loading Screen**: Animated heart icon while the playlist loads
 - **Responsive Design**: Optimized layout for mobile and desktop
 
-🛠️ **Technologies**
+## 🛠️ Technologies
 
 - React 19 (with Hooks and Functional Components)
 - TypeScript
@@ -26,7 +28,7 @@ Lovify started as a personal gift and grew into a web app where anyone can creat
 - CSS3 (custom Spotify-inspired theme)
 - gh-pages
 
-🚀 **Installation & Running**
+## 🚀 Installation & Running
 
 **Clone the repository**
 
@@ -49,7 +51,7 @@ npm run dev
 
 The app will be available at `http://localhost:5173/lovify/`
 
-🖼️ **App Preview**
+## 🖼️ App Preview
 
 **Creation Form**
 
