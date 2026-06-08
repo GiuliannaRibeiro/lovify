@@ -1,6 +1,10 @@
+import { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 
 import { getPlaylist } from "../components/playlist/lib/playlist-storage";
+
+import lovifyIcon from "../assets/lovify-minimalist.png";
 
 import { usePlaylistPlayer } from "../components/playlist/hooks/usePlaylistPlayer";
 
@@ -10,10 +14,16 @@ import { TrackList } from "../components/playlist/TrackList";
 import { ShareSection } from "../components/playlist/ShareSection";
 import { NowPlayingBar } from "../components/playlist/NowPlayingBar";
 
+import type { Playlist } from "../components/playlist/types";
+
 export default function PlaylistPage() {
   const { id } = useParams();
 
-  const playlist = getPlaylist(id!);
+  const [playlist, setPlaylist] =
+    useState<Playlist | null>(null);
+
+  const [loading, setLoading] =
+    useState(true);
 
   const {
     playingIndex,
@@ -21,6 +31,45 @@ export default function PlaylistPage() {
     isPlaying,
     togglePlay,
   } = usePlaylistPlayer();
+
+  useEffect(() => {
+    async function loadPlaylist() {
+      if (!id) {
+        setLoading(false);
+        return;
+      }
+  
+      const [data] = await Promise.all([
+        getPlaylist(id),
+  
+        new Promise((resolve) =>
+          setTimeout(resolve, 2000)
+        ),
+      ]);
+  
+      setPlaylist(data);
+  
+      setLoading(false);
+    }
+  
+    loadPlaylist();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="playlist-loading">
+        <img
+          src={lovifyIcon}
+          alt="Lovify"
+          className="loading-heart"
+        />
+  
+        <p>
+          Carregando playlist...
+        </p>
+      </div>
+    );
+  }
 
   if (!playlist) {
     return (

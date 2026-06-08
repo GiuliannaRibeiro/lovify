@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AlertCircle } from "lucide-react";
 
 import { usePlaylistDraft } from "./hooks/usePlaylistDraft";
 
+import catsInLove from "../../assets/cats-in-love.jpg";
 import { savePlaylist } from "./lib/playlist-storage";
-import { generatePlaylistId } from "./lib/playlist-id";
 
 import { PhotoUpload } from "./PhotoUpload";
 import { TrackInputList } from "./TrackInputList";
@@ -11,6 +13,12 @@ import loveSong from "../../assets/love-song.png";
 
 export function PlaylistForm() {
   const navigate = useNavigate();
+
+  const [error, setError] =
+    useState<string | null>(null);
+
+  const [submitting, setSubmitting] =
+    useState(false);
 
   const {
     name,
@@ -23,30 +31,49 @@ export function PlaylistForm() {
     updateTrack,
   } = usePlaylistDraft();
 
-  function handleSubmit() {
+  useEffect(() => {
+    if (
+      error &&
+      tracks.some((track) =>
+        track.name.trim()
+      )
+    ) {
+      setError(null);
+    }
+  }, [tracks, error]);
+
+  async function handleSubmit() {
     const filteredTracks =
       tracks.filter((track) =>
         track.name.trim()
       );
 
     if (filteredTracks.length === 0) {
-      alert(
+      setError(
         "Adicione pelo menos uma música"
       );
 
       return;
     }
 
-    const id = generatePlaylistId();
+    setError(null);
+    setSubmitting(true);
 
-    savePlaylist({
-      id,
-      name: name || "Coisas que amo em ti ❤",
-      cover,
-      tracks: filteredTracks,
-    });
+    try {
+      const id = await savePlaylist({
+        name: name || "Coisas que amo em ti ❤",
+        cover: cover || catsInLove,
+        tracks: filteredTracks,
+      });
 
-    navigate(`/playlist/${id}`);
+      navigate(`/playlist/${id}`);
+    } catch {
+      setError(
+        "Não foi possível gerar a playlist. Tente novamente."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -59,6 +86,7 @@ export function PlaylistForm() {
         <PhotoUpload
           cover={cover}
           onChange={setCover}
+          onError={setError}
         />
       </div>
 
@@ -91,12 +119,28 @@ export function PlaylistForm() {
         />
       </div>
 
+      {error && (
+        <div
+          className="form-error"
+          role="alert"
+        >
+          <AlertCircle size={18} />
+
+          <span>{error}</span>
+        </div>
+      )}
+
       <button
         className="btn-gerar"
         onClick={handleSubmit}
+        disabled={submitting}
       >
         <img className="btn-icon-song" src={loveSong} />
-        <span>Gerar playlist</span>
+        <span>
+          {submitting
+            ? "Gerando..."
+            : "Gerar playlist"}
+        </span>
       </button>
     </div>
   );
