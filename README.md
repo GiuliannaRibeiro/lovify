@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# ❤️ Lovify
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌐 **Live demo:** [giuliannaribeiro.github.io/lovify](https://giuliannaribeiro.github.io/lovify/)
 
-Currently, two official plugins are available:
+Lovify started as a personal gift and grew into a web app where anyone can create and share a personalized playlist for their partner, perfect for **Valentine's Day**, anniversaries, or just because. Built with React 19 and Vite, it offers a Spotify-inspired interface focused on a clean, emotional experience: customize the cover photo, playlist name, and song list, then share a unique link. Playlists are stored in **Firebase Firestore**, making each creation accessible from anywhere.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+✅ **Features**
 
-## React Compiler
+- **Playlist Creation**: Customize name, cover photo, and track list
+- **Photo Upload**: Optional cover image with a default fallback
+- **Dynamic Track List**: Add, remove, and edit songs with auto-generated durations
+- **Spotify-Style Player UI**: Hero section, play/pause controls, track list, and now-playing bar
+- **Shareable Link**: Each playlist gets a unique URL to send to your partner
+- **Copy to Clipboard**: One-click link copying with visual feedback
+- **Loading Screen**: Animated heart icon while the playlist loads
+- **Responsive Design**: Optimized layout for mobile and desktop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🛠️ **Technologies**
 
-## Expanding the ESLint configuration
+- React 19 (with Hooks and Functional Components)
+- TypeScript
+- Vite 8
+- React Router DOM 7
+- Firebase Firestore
+- Lucide React (icons)
+- CSS3 (custom Spotify-inspired theme)
+- gh-pages
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🚀 **Installation & Running**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Clone the repository**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/GiuliannaRibeiro/lovify.git
+cd lovify
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Install dependencies**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+**Run the development server**
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173/lovify/`
+
+🖼️ **App Preview**
+
+**Creation Form**
+
+![Creation form](docs/form-screen.png)
+
+**Generated Playlist**
+
+![Generated playlist](docs/playlist-screen.png)
