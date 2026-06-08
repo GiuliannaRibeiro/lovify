@@ -1,4 +1,5 @@
 import { compressImage } from "./lib/compress-image";
+import { LIMITS } from "./lib/limits";
 import photoLove from "../../assets/photo-love.png";
 
 type Props = {
@@ -19,6 +20,21 @@ export function PhotoUpload({
       event.target.files?.[0];
 
     if (!file) return;
+
+    const maxBytes =
+      LIMITS.MAX_PHOTO_MB *
+      1024 *
+      1024;
+
+    if (file.size > maxBytes) {
+      onError?.(
+        `A foto deve ter no máximo ${LIMITS.MAX_PHOTO_MB}MB`
+      );
+
+      event.target.value = "";
+
+      return;
+    }
 
     try {
       const compressed =

@@ -1,3 +1,5 @@
+import { LIMITS } from "./lib/limits";
+
 import type { Track } from "./types";
 
 import { TrackInputRow } from "./TrackInputRow";
@@ -21,6 +23,10 @@ export function TrackInputList({
   onRemove,
   onChange,
 }: Props) {
+  const atTrackLimit =
+    tracks.length >=
+    LIMITS.MAX_TRACKS;
+
   return (
     <div>
       <div className="musicas-list">
@@ -41,9 +47,15 @@ export function TrackInputList({
       <button
         className="btn-add-musica"
         onClick={onAdd}
+        disabled={atTrackLimit}
       >
         + Adicionar linha
       </button>
+
+      <p className="field-hint">
+        {tracks.length}/{LIMITS.MAX_TRACKS}{" "}
+        faixas
+      </p>
     </div>
   );
 }

@@ -131,6 +131,14 @@ body {
   color: #666;
 }
 
+.field-hint {
+  margin-top: 0.35rem;
+
+  font-size: 0.75rem;
+  color: #666;
+  text-align: right;
+}
+
 /* PHOTO */
 
 .photo-upload {
@@ -289,9 +297,14 @@ body {
   transition: all 0.2s;
 }
 
-.btn-add-musica:hover {
+.btn-add-musica:hover:not(:disabled) {
   border-color: var(--sp-green);
   color: var(--sp-green);
+}
+
+.btn-add-musica:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* BUTTON */

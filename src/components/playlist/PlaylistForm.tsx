@@ -5,6 +5,7 @@ import { AlertCircle } from "lucide-react";
 import { usePlaylistDraft } from "./hooks/usePlaylistDraft";
 
 import catsInLove from "../../assets/cats-in-love.jpg";
+import { LIMITS } from "./lib/limits";
 import { savePlaylist } from "./lib/playlist-storage";
 
 import { PhotoUpload } from "./PhotoUpload";
@@ -56,14 +57,38 @@ export function PlaylistForm() {
       return;
     }
 
+    if (
+      filteredTracks.length >
+      LIMITS.MAX_TRACKS
+    ) {
+      setError(
+        `Máximo de ${LIMITS.MAX_TRACKS} faixas por playlist`
+      );
+
+      return;
+    }
+
     setError(null);
     setSubmitting(true);
 
     try {
       const id = await savePlaylist({
-        name: name || "Coisas que amo em ti ❤",
+        name: (
+          name ||
+          "Coisas que amo em ti ❤"
+        ).slice(0, LIMITS.PLAYLIST_NAME),
         cover: cover || catsInLove,
-        tracks: filteredTracks,
+        tracks: filteredTracks.map(
+          (track) => ({
+            ...track,
+            name: track.name
+              .trim()
+              .slice(
+                0,
+                LIMITS.TRACK_NAME
+              ),
+          })
+        ),
       });
 
       navigate(`/playlist/${id}`);
@@ -98,12 +123,16 @@ export function PlaylistForm() {
         <input
           type="text"
           value={name}
-          maxLength={40}
+          maxLength={LIMITS.PLAYLIST_NAME}
           placeholder="Coisas que amo em ti ❤"
           onChange={(e) =>
             setName(e.target.value)
           }
         />
+
+        <p className="field-hint">
+          {name.length}/{LIMITS.PLAYLIST_NAME}
+        </p>
       </div>
 
       <div className="form-section">

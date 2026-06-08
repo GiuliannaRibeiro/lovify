@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { Track } from "../types";
 
 import { randomDuration } from "../lib/duration";
+import { LIMITS } from "../lib/limits";
 
 export function usePlaylistDraft() {
   const [name, setName] = useState("");
@@ -26,14 +27,23 @@ export function usePlaylistDraft() {
   ]);
 
   function addTrack() {
-    setTracks((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        name: "",
-        duration: randomDuration(),
-      },
-    ]);
+    setTracks((prev) => {
+      if (
+        prev.length >=
+        LIMITS.MAX_TRACKS
+      ) {
+        return prev;
+      }
+
+      return [
+        ...prev,
+        {
+          id: crypto.randomUUID(),
+          name: "",
+          duration: randomDuration(),
+        },
+      ];
+    });
   }
 
   function removeTrack(id: string) {
@@ -53,7 +63,10 @@ export function usePlaylistDraft() {
         track.id === id
           ? {
               ...track,
-              name: value,
+              name: value.slice(
+                0,
+                LIMITS.TRACK_NAME
+              ),
             }
           : track
       )
