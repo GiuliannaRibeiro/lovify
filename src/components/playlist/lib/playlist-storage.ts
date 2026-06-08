@@ -1,35 +1,42 @@
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+} from "firebase/firestore";
+
+import { db } from "../../../lib/firebase";
+
 import type { Playlist } from "../types";
 
-const STORAGE_KEY = "lovify-playlists";
-
-export function savePlaylist(
+export async function savePlaylist(
   playlist: Playlist
 ) {
-  const playlists = getAllPlaylists();
-
-  playlists[playlist.id] = playlist;
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(playlists)
-  );
-}
-
-export function getPlaylist(id: string) {
-  const playlists = getAllPlaylists();
-
-  return playlists[id] || null;
-}
-
-function getAllPlaylists(): Record<
-  string,
-  Playlist
-> {
-  const data = localStorage.getItem(
-    STORAGE_KEY
+  const docRef = await addDoc(
+    collection(db, "playlists"),
+    playlist
   );
 
-  if (!data) return {};
+  return docRef.id;
+}
 
-  return JSON.parse(data);
+export async function getPlaylist(
+  id: string
+) {
+  const docRef = doc(
+    db,
+    "playlists",
+    id
+  );
+
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    return null;
+  }
+
+  return {
+    id: docSnap.id,
+    ...docSnap.data(),
+  } as Playlist;
 }
