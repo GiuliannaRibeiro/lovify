@@ -1,3 +1,5 @@
+import { Play } from "lucide-react";
+
 import type { Track } from "./types";
 
 type Props = {
@@ -21,7 +23,15 @@ export function TrackItem({
       onClick={onClick}
     >
       <span className="track-num">
-        {playing ? "▶" : index + 1}
+        {playing ? (
+          <Play
+            className="track-play-icon"
+            size={14}
+            fill="currentColor"
+          />
+        ) : (
+          index + 1
+        )}
       </span>
 
       <div className="track-info">

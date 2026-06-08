@@ -1,3 +1,5 @@
+import { Pause, Play } from "lucide-react";
+
 import checkIcon from '../../assets/check-icon.png'
 import shareLink from '../../assets/download-Icon.png'
 
@@ -16,7 +18,19 @@ export function PlaylistControls({
         className="btn-play"
         onClick={onToggle}
       >
-        {isPlaying ? "⏸" : "▶"}
+        {isPlaying ? (
+          <Pause
+            className="btn-play-icon"
+            size={15}
+            fill="currentColor"
+          />
+        ) : (
+          <Play
+            className="btn-play-icon"
+            size={15}
+            fill="currentColor"
+          />
+        )}
       </button>
 
       <button className="btn-heart">

@@ -1,3 +1,5 @@
+import { Check } from "lucide-react";
+
 import { useClipboard } from "./hooks/useClipboard";
 import heartLink from "../../assets/heart-link.png"
 
@@ -31,9 +33,14 @@ export function ShareSection({
           }`}
           onClick={() => copy(url)}
         >
-          {copied
-            ? "✓ Copiado!"
-            : "Copiar"}
+          {copied ? (
+            <>
+              <Check size={16} />
+              Copiado!
+            </>
+          ) : (
+            "Copiar"
+          )}
         </button>
       </div>
     </div>

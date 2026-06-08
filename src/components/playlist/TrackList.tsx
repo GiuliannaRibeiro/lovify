@@ -1,3 +1,5 @@
+import { Clock } from "lucide-react";
+
 import type { Track } from "./types";
 
 import { TrackItem } from "./TrackItem";
@@ -22,7 +24,10 @@ export function TrackList({
 
         <span>Música</span>
 
-        <span>⏱</span>
+        <Clock
+          className="track-header-clock"
+          size={14}
+        />
       </div>
 
       {tracks.map((track, index) => (
