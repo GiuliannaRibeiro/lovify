@@ -1,6 +1,6 @@
 # ❤️ Lovify
 
-Lovify started as a personal gift and grew into a web app where anyone can create and share a personalized playlist for their partner, perfect for **Valentine's Day**, anniversaries, or just because. Built with React 19 and Vite, it offers a Spotify-inspired interface focused on a clean, emotional experience: customize the cover photo, playlist name, and song list, then share a unique link. Playlists are stored in **Firebase Firestore**, making each creation accessible from anywhere.
+Lovify is a web application built with React 19 and Vite, created for **Dia dos Namorados** (Brazilian Valentine's Day, June 12th), that lets users create and share a personalized playlist for their partner, perfect for **Valentine's Day**, anniversaries, or just because. Each track can be a quality or little thing you love about them. The app uses **Firebase Firestore** for storage and offers a fully responsive, Spotify-inspired interface.
 
 **Live demo:** [giuliannaribeiro.github.io/lovify](https://giuliannaribeiro.github.io/lovify/)
 
@@ -9,8 +9,9 @@ Lovify started as a personal gift and grew into a web app where anyone can creat
 ## ✅ Features
 
 - **Playlist Creation**: Customize name, cover photo, and track list
+- **Love as Tracks**: Each "song" can be a quality, habit, or little thing you adore about your partner
 - **Photo Upload**: Optional cover image with a default fallback
-- **Dynamic Track List**: Add, remove, and edit songs with auto-generated durations
+- **Dynamic Track List**: Add, remove, and edit tracks with auto-generated durations
 - **Spotify-Style Player UI**: Hero section, play/pause controls, track list, and now-playing bar
 - **Shareable Link**: Each playlist gets a unique URL to send to your partner
 - **Copy to Clipboard**: One-click link copying with visual feedback
@@ -55,8 +56,8 @@ The app will be available at `http://localhost:5173/lovify/`
 
 **Creation Form**
 
-![Creation form](docs/form-screen.png)
+![Creation form](src/assets/creation-form.png)
 
 **Generated Playlist**
 
-![Generated playlist](docs/playlist-screen.png)
+![Generated playlist](src/assets/generated-playlist.png)
