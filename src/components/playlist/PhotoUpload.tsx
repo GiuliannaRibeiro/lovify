@@ -1,15 +1,18 @@
+import { compressImage } from "./lib/compress-image";
 import photoLove from "../../assets/photo-love.png";
 
 type Props = {
   cover?: string;
   onChange: (value: string) => void;
+  onError?: (message: string) => void;
 };
 
 export function PhotoUpload({
   cover,
   onChange,
+  onError,
 }: Props) {
-  function handleFile(
+  async function handleFile(
     event: React.ChangeEvent<HTMLInputElement>
   ) {
     const file =
@@ -17,13 +20,18 @@ export function PhotoUpload({
 
     if (!file) return;
 
-    const reader = new FileReader();
+    try {
+      const compressed =
+        await compressImage(file);
 
-    reader.onload = () => {
-      onChange(reader.result as string);
-    };
+      onChange(compressed);
+    } catch {
+      onError?.(
+        "Não foi possível carregar a foto. Tente outra imagem."
+      );
+    }
 
-    reader.readAsDataURL(file);
+    event.target.value = "";
   }
 
   return (
